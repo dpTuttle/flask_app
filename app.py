@@ -9,7 +9,7 @@ from flask import Flask, request, render_template
 import pickle 
 
 #Initialize Flask and set the template folder to "template"
-app = Flask(__name__, template_folder = 'template')
+app = Flask(__name__)
 
 #Open our model 
 model = pickle.load(open('model.pkl','rb'))
@@ -17,7 +17,7 @@ model = pickle.load(open('model.pkl','rb'))
 #create our "home" route using the "index.html" page
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return 'index.html'
 
 #Set a post method to yield predictions on page
 @app.route('/', methods = ['POST'])
@@ -36,7 +36,7 @@ def predict():
     output = np.squeeze(prediction)[()]/1000
 
     #Return prediction output as render with text displayed
-    return render_template('index.html', prediction_text = f"These variables will lead to a median house price of: ${output:,.2f} for this area.")
+    return 'index.html', prediction_text = f"These variables will lead to a median house price of: ${output:,.2f} for this area."
 
 
 #Run app
