@@ -9,7 +9,7 @@ from flask import Flask, request, render_template
 import pickle 
 
 #Initialize Flask and set the template folder to "template"
-app = Flask(__name__)
+app = Flask(__name__, template_folder = 'template')
 
 #Open our model 
 model = pickle.load(open('model.pkl','rb'))
